@@ -6,13 +6,11 @@ android {
     defaultConfig {
         applicationId "com.example.user.speechrecognizationasservice"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
+
     }
 
     buildTypes {

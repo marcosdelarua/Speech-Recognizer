@@ -82,12 +82,14 @@ public class Speech {
 
         @Override
         public void onReadyForSpeech(final Bundle bundle) {
+            Logger.debug("RecognitionListener", "onReadyForSpeech");
             mPartialData.clear();
             mUnstableData = null;
         }
 
         @Override
         public void onBeginningOfSpeech() {
+            Logger.debug("RecognitionListener", "onBeginningOfSpeech");
             if (mProgressView != null)
                 mProgressView.onBeginningOfSpeech();
 
@@ -108,6 +110,7 @@ public class Speech {
 
         @Override
         public void onRmsChanged(final float v) {
+            //Logger.debug("RecognitionListener", "onRmsChanged " + v);
             try {
                 if (mDelegate != null)
                     mDelegate.onSpeechRmsChanged(v);
@@ -122,6 +125,7 @@ public class Speech {
 
         @Override
         public void onPartialResults(final Bundle bundle) {
+            Logger.debug("RecognitionListener", "onPartialResults: " + bundle);
             mDelayedStopListening.resetTimer();
 
             final List<String> partialResults = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
@@ -147,6 +151,8 @@ public class Speech {
 
         @Override
         public void onResults(final Bundle bundle) {
+            Logger.debug("RecognitionListener", "onResults: " + bundle);
+
             mDelayedStopListening.cancel();
 
             final List<String> results = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
@@ -186,10 +192,12 @@ public class Speech {
         @Override
         public void onBufferReceived(final byte[] bytes) {
 
+            Logger.debug("RecognitionListener", "onBufferReceived " + bytes.length + " bytes");
         }
 
         @Override
         public void onEndOfSpeech() {
+            Logger.debug("RecognitionListener", "onEndOfSpeech");
             if (mProgressView != null)
                 mProgressView.onEndOfSpeech();
         }
@@ -197,6 +205,7 @@ public class Speech {
         @Override
         public void onEvent(final int i, final Bundle bundle) {
 
+            Logger.debug("RecognitionListener", "onEvent " + i);
         }
     };
 
